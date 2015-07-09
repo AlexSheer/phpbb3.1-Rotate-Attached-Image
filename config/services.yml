@@ -1,0 +1,8 @@
+services:
+    sheer.image_rotator.listener:
+        class: sheer\image_rotator\event\listener
+        arguments:
+            - %core.root_path%
+            - @config
+        tags:
+            - { name: event.listener }
