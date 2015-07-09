@@ -20,7 +20,7 @@
       "phpbb/epv": "dev-master"
     },
     "extra": {
-        "display-name": "Image rotator",
+        "display-name": "Attached Image rotator",
         "soft-require": {
             "phpbb/phpbb": "3.1.*@dev"
         }
