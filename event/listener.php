@@ -56,7 +56,7 @@ class listener implements EventSubscriberInterface
 		{
 			if (function_exists('exif_imagetype') && ($filedata['extension'] == 'jpg' || $filedata['extension'] == 'jpeg'))
 			{
-				$exif = exif_read_data($destination_file, 0, true);
+				$exif = @exif_read_data($destination_file, 0, true);
 				if(isset($exif['IFD0']['Orientation']))
 				{
 					$source = imagecreatefromjpeg($destination_file);
