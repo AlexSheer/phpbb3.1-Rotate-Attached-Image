@@ -57,34 +57,62 @@ class listener implements EventSubscriberInterface
 			if (function_exists('exif_imagetype') && ($filedata['extension'] == 'jpg' || $filedata['extension'] == 'jpeg'))
 			{
 				$exif = @exif_read_data($destination_file, 0, true);
-				if(isset($exif['IFD0']['Orientation']))
+				if (isset($exif['IFD0']['Orientation']))
 				{
 					$source = imagecreatefromjpeg($destination_file);
 					$rotate = true;
+					$flip = false;
 
 					switch($exif['IFD0']['Orientation'])
 					{
+						case 2: // flip horizontal
+							$flip = imageflip($source, IMG_FLIP_HORIZONTAL);
+							$rotate = false;
+						break;
 						case 3: // 180 rotate left
 							$rotate = imagerotate($source, 180, 0);
-							break;
+						break;
+						case 4: // flip vertical
+							$flip = imageflip($source, IMG_FLIP_VERTICAL);
+							$rotate = false;
+						break;
+						case 5: // flip horizontal and 90 rotate left
+							$flip = imageflip($source, IMG_FLIP_HORIZONTAL);
+							if ($flip)
+							{
+								$flip = false;
+								$rotate = imagerotate($source, 90, 0);
+							}
+						break;
 						case 6: // 90 rotate right
 							$rotate = imagerotate($source, -90 ,0);
-							break;
+						break;
+						case 7: // flip horizontal and 90 rotate right
+							$flip = imageflip($source, IMG_FLIP_HORIZONTAL);
+							if ($flip)
+							{
+								$flip = false;
+								$rotate = imagerotate($source, -90, 0);
+							}
+						break;
 						case 8: // 90 rotate left
 							$rotate = imagerotate($source, 90, 0);
-							break;
-						case 8: // 90 rotate left
-							$rotate = imagerotate($source, 90, 0);
-							break;
-						default:
-							$rotate = false;
-							break;
+						break;
+						default: // nothing to do
+							$rotate = $flip = false;
+						break;
 					}
-					if($rotate)
+					if ($rotate)
 					{
 						unlink($destination_file);
 						imagejpeg($rotate, $destination_file, 100);
+						imagedestroy($rotate);
 					}
+					else if ($flip)
+					{
+						imagejpeg($source, $destination_file, 100);
+					}
+					imagedestroy($source);
 				}
 			}
 		}
