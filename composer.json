@@ -2,14 +2,14 @@
     "name": "sheer/image_rotator",
     "type": "phpbb-extension",
     "description": "Auto correct image orientation on upload",
-    "homepage": "http://www.phpbbguru.net",
-    "version": "1.0.0",
-    "time": "2015-07-08",
+    "homepage": "https://www.phpbbguru.net",
+    "version": "1.0.1",
+    "time": "2018-02-15",
     "license": "GPL-2.0",
     "authors": [
         {
             "name": "Sheer",
-            "homepage": "http://www.phpbbguru.net",
+            "homepage": "https://www.phpbbguru.net",
             "role": "Developer"
         }
     ],
@@ -23,6 +23,11 @@
         "display-name": "Attached Image rotator",
         "soft-require": {
             "phpbb/phpbb": "3.1.*@dev"
+        },
+        "version-check": {
+            "host": "sheer.phpbbguru.net",
+            "directory": "/versions/image_rotator",
+            "filename": "version.json"
         }
     }
 }
