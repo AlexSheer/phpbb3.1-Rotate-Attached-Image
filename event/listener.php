@@ -115,6 +115,31 @@ class listener implements EventSubscriberInterface
 					imagedestroy($source);
 				}
 			}
+
+			if ($this->config['rotate_img_max_width'] && $this->config['rotate_img_max_height'])
+			{
+				$this->upload_image_resizer($destination_file);
+			}
+		}
+	}
+
+	public function upload_image_resizer($destination_file)
+	{
+		$quality = 90;
+		$size = getimagesize($destination_file);
+		$width = $size[0];
+		$height = $size[1];
+		if ($height > $this->config['rotate_img_max_height'] || $width > $this->config['rotate_img_max_width'])
+		{
+			$int_factor = min(($this->config['rotate_img_max_width'] / $width), ($this->config['rotate_img_max_height'] / $height));
+			$width = round($width * $int_factor);
+			$height = round($height * $int_factor);
+			$destination = imagecreatetruecolor($width, $height);
+			@ini_set('gd.jpeg_ignore_warning', 1);
+			$source = imagecreatefromjpeg($destination_file);
+			imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
+			imagejpeg($destination, $destination_file, $quality);
+			imagedestroy($destination);
 		}
 	}
 }
