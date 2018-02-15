@@ -1,0 +1,29 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_ACP_IMAGES_ROTATOR_CONFIG}</h1>
+<!-- IF S_IMAGES_RESIZE_ENABLED -->
+<p>{L_ACP_IMAGES_ROTATOR_EXPLAIN}</p>
+<!-- IF S_RESIZE_ENABLED -->
+<p>{L_ACP_IMAGES_RESIZE_ENABLED}</p>
+<p>{L_ACP_IMAGES_ROTATOR_CONFIG_EXPLAIN}</p>
+<!-- ENDIF -->
+<form method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{L_ACP_IMAGES_ROTATOR_CONFIG}</legend>
+			<dl>
+				<dt><label for="img_max">{L_MAX_IMAGE_SIZE}:</label><br><span>{L_MAX_IMAGE_SIZE_EXPLAIN}</span></dt>
+				<dd><input id="img_max" min="0" max="9999" name="limit_width" value="{LIMIT_WIDTH}" type="number"> x <input min="0" max="9999" name="limit_height" value="{LIMIT_HEIGHT}" type="number"> {L_PIXEL}</dd>
+			</dl>
+	</fieldset>
+	<p class="submit-buttons">
+		{S_HIDDEN_FIELDS}
+		{S_FORM_TOKEN}
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
+	</p>
+</form>
+<!-- ELSE -->
+<p class="error">{L_IMAGES_RESIZE_DISABLED}</p>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->
