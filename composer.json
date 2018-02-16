@@ -26,6 +26,7 @@
         },
         "version-check": {
             "host": "sheer.phpbbguru.net",
+            "ssl": true,
             "directory": "/versions/image_rotator",
             "filename": "version.json"
         }
