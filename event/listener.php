@@ -118,12 +118,12 @@ class listener implements EventSubscriberInterface
 
 			if ($this->config['rotate_img_max_width'] && $this->config['rotate_img_max_height'])
 			{
-				$this->upload_image_resizer($destination_file);
+				$this->upload_image_resizer($destination_file, $filedata['extension']);
 			}
 		}
 	}
 
-	public function upload_image_resizer($destination_file)
+	public function upload_image_resizer($destination_file, $ext)
 	{
 		$quality = 90;
 		$size = getimagesize($destination_file);
@@ -135,10 +135,38 @@ class listener implements EventSubscriberInterface
 			$width = round($width * $int_factor);
 			$height = round($height * $int_factor);
 			$destination = imagecreatetruecolor($width, $height);
-			@ini_set('gd.jpeg_ignore_warning', 1);
-			$source = imagecreatefromjpeg($destination_file);
-			imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
-			imagejpeg($destination, $destination_file, $quality);
+			switch ($ext)
+			{
+				case 'jpg':
+				case 'jpeg':
+					@ini_set('gd.jpeg_ignore_warning', 1);
+					$source = imagecreatefromjpeg($destination_file);
+					imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
+					imagejpeg($destination, $destination_file, $quality);
+				break;
+				case 'png':
+					@imagealphablending($destination, false);
+					@imagesavealpha($destination, true);
+					$source = imagecreatefrompng($destination_file);
+					imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
+					imagepng($destination, $destination_file);
+				break;
+				case 'gif':
+					$source = imagecreatefromgif($this->destination_file);
+					$trnprt_indx = imagecolortransparent($source);
+					if ($trnprt_indx >= 0) //transparent
+					{
+						$trnprt_color = imagecolorsforindex($source, $trnprt_indx);
+						$trnprt_indx = imagecolorallocate($destination, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
+						imagefill($destination, 0, 0, $trnprt_indx);
+						imagecolortransparent($destination, $trnprt_indx);
+					}
+					imagecopyresampled($destination, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
+					imagegif($destination, $destination_file);
+				break;
+				default:
+				break;
+			}
 			imagedestroy($destination);
 		}
 	}
