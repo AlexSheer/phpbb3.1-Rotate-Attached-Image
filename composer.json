@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Auto correct image orientation on upload",
     "homepage": "https://www.phpbbguru.net",
-    "version": "1.0.1",
-    "time": "2018-02-15",
+    "version": "1.0.2",
+    "time": "2018-03-10",
     "license": "GPL-2.0",
     "authors": [
         {
