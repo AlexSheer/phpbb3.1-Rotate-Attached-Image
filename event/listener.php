@@ -57,6 +57,12 @@ class listener implements EventSubscriberInterface
 			if (function_exists('exif_imagetype') && ($filedata['extension'] == 'jpg' || $filedata['extension'] == 'jpeg'))
 			{
 				$exif = @exif_read_data($destination_file, 0, true);
+				if (isset($exif['THUMBNAIL']))
+				{
+					$rotate = false;
+					$flip = false;
+					unset($exif['IFD0']['Orientation']);
+				}
 				if (isset($exif['IFD0']['Orientation']))
 				{
 					$source = imagecreatefromjpeg($destination_file);
