@@ -57,8 +57,9 @@ class listener implements EventSubscriberInterface
 			if (function_exists('exif_imagetype') && ($filedata['extension'] == 'jpg' || $filedata['extension'] == 'jpeg'))
 			{
 				$exif = @exif_read_data($destination_file, 0, true);
-				if (isset($exif['THUMBNAIL']))
+				if (isset($exif['THUMBNAIL']) && $exif['THUMBNAIL']['Orientation'] == 1)
 				{
+					//print_r($exif['THUMBNAIL']);
 					$rotate = false;
 					$flip = false;
 					unset($exif['IFD0']['Orientation']);
@@ -104,6 +105,7 @@ class listener implements EventSubscriberInterface
 						case 8: // 90 rotate left
 							$rotate = imagerotate($source, 90, 0);
 						break;
+						case 1: // no break here
 						default: // nothing to do
 							$rotate = $flip = false;
 						break;
