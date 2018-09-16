@@ -59,7 +59,6 @@ class listener implements EventSubscriberInterface
 				$exif = @exif_read_data($destination_file, 0, true);
 				if (isset($exif['THUMBNAIL']) && $exif['THUMBNAIL']['Orientation'] == 1)
 				{
-					//print_r($exif['THUMBNAIL']);
 					$rotate = false;
 					$flip = false;
 					unset($exif['IFD0']['Orientation']);
