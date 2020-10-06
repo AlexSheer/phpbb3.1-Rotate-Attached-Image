@@ -1,9 +1,9 @@
 {
-    "name": "sheer/image_rotator",
+    "name": "sheer/imagerotator",
     "type": "phpbb-extension",
     "description": "Auto correct image orientation on upload",
     "homepage": "https://www.phpbbguru.net/community/viewtopic.php?f=64&t=44140",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "time": "2018-09-16",
     "license": "GPL-2.0",
     "authors": [

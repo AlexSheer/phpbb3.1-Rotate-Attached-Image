@@ -6,7 +6,7 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-namespace sheer\image_rotator\migrations;
+namespace sheer\imagerotator\migrations;
 
 class image_rotator_1_0_1 extends \phpbb\db\migration\migration
 {
@@ -17,7 +17,7 @@ class image_rotator_1_0_1 extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\sheer\image_rotator\migrations\image_rotator_1_0_0');
+		return array('\sheer\imagerotator\migrations\image_rotator_1_0_0');
 	}
 
 	public function update_schema()
@@ -43,10 +43,10 @@ class image_rotator_1_0_1 extends \phpbb\db\migration\migration
 			array('config.add', array('rotate_img_max_height', 0)),
 			// ACP
 			array('module.add', array('acp', 'ACP_ATTACHMENTS', array(
-				'module_basename'	=> '\sheer\image_rotator\acp\main_module',
+				'module_basename'	=> '\sheer\imagerotator\acp\main_module',
 				'module_langname'	=> 'ACP_IMAGES_ROTATOR_CONFIG',
 				'module_mode'		=> 'config',
-				'module_auth'		=> 'ext_sheer/image_rotator && acl_a_board',
+				'module_auth'		=> 'ext_sheer/imagerotator && acl_a_board',
 				'module_enabled'	=> true,
 			))),
 		);

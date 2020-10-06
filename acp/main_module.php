@@ -7,7 +7,7 @@
 *
 */
 
-namespace sheer\image_rotator\acp;
+namespace sheer\imagerotator\acp;
 
 class main_module
 {

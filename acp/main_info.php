@@ -7,20 +7,20 @@
 *
 */
 
-namespace sheer\image_rotator\acp;
+namespace sheer\imagerotator\acp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\sheer\image_rotator\acp\main_module',
+			'filename'	=> '\sheer\imagerotator\acp\main_module',
 			'version'	=> '1.0.1',
 			'title' => 'ACP_IMAGES_ROTATOR_CONFIG',
 			'modes'		=> array(
 				'manage'	=> array(
 					'title' => 'ACP_IMAGES_ROTATOR_CONFIG',
-					'auth' => 'ext_sheer/image_rotator && acl_a_board',
+					'auth' => 'ext_sheer/imagerotator && acl_a_board',
 					'cat' => array('ACP_IMAGES_ROTATOR')
 				),
 			),
