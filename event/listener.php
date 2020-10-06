@@ -6,7 +6,7 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-namespace sheer\image_rotator\event;
+namespace sheer\imagerotator\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

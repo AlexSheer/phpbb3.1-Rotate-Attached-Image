@@ -6,7 +6,7 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-namespace sheer\image_rotator\migrations;
+namespace sheer\imagerotator\migrations;
 
 class image_rotator_1_0_3 extends \phpbb\db\migration\migration
 {
@@ -17,7 +17,7 @@ class image_rotator_1_0_3 extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\sheer\image_rotator\migrations\image_rotator_1_0_2');
+		return array('\sheer\imagerotator\migrations\image_rotator_1_0_2');
 	}
 
 	public function update_schema()
