@@ -57,7 +57,7 @@ class listener implements EventSubscriberInterface
 			if (function_exists('exif_imagetype') && ($filedata['extension'] == 'jpg' || $filedata['extension'] == 'jpeg'))
 			{
 				$exif = @exif_read_data($destination_file, 0, true);
-				if (isset($exif['THUMBNAIL']) && $exif['THUMBNAIL']['Orientation'] == 1)
+				if (isset($exif['THUMBNAIL']) && isset($exif['THUMBNAIL']['Orientation']) == 1)
 				{
 					$rotate = false;
 					$flip = false;
